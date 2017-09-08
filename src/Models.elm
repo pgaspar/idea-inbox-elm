@@ -1,12 +1,14 @@
 module Models exposing (..)
 
+import RemoteData exposing (WebData)
+
 type alias Model =
-    { entries : List Entry
+    { entries : WebData(List Entry)
     }
 
 initialModel : Model
 initialModel =
-    { entries = [ Entry "1" "Test Entry" 20 ]
+    { entries = RemoteData.Loading
     }
 
 type alias EntryId =

@@ -1,4 +1,7 @@
 module Msgs exposing (..)
 
+import Models exposing (Entry)
+import RemoteData exposing (WebData)
+
 type Msg
-  = NoOp
+    = OnFetchEntries (WebData (List Entry))

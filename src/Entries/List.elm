@@ -1,15 +1,16 @@
 module Entries.List exposing (..)
 
+import RemoteData exposing (WebData)
 import Html exposing (..)
 import Html.Attributes exposing (class)
 import Msgs exposing (Msg)
 import Models exposing (Entry)
 
-view : List Entry -> Html Msg
-view entries =
+view : WebData(List Entry) -> Html Msg
+view response =
     div []
         [ nav
-        , list entries
+        , maybeList response
         ]
 
 
@@ -18,6 +19,21 @@ nav =
     div [ class "clearfix mb2 white bg-black" ]
         [ div [ class "left p2" ] [ text "Ideas" ] ]
 
+
+maybeList : WebData(List Entry) -> Html Msg
+maybeList response =
+    case response of
+        RemoteData.NotAsked ->
+            text ""
+
+        RemoteData.Loading ->
+            text "Loading..."
+
+        RemoteData.Failure error ->
+            text (toString error)
+
+        RemoteData.Success entries ->
+            list entries
 
 list : List Entry -> Html Msg
 list entries =
