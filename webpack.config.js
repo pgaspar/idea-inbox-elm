@@ -47,6 +47,7 @@ module.exports = {
   devServer: {
     inline: true,
     stats: { colors: true },
+    historyApiFallback: true, // return index.js on every path
   },
 
 };
