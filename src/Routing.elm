@@ -21,3 +21,14 @@ parseLocation location =
 
         Nothing ->
             NotFoundRoute
+
+
+-- Path Helpers
+
+entriesPath : String
+entriesPath =
+    "/entries"
+
+entryPath : EntryId -> String
+entryPath entryId =
+    "/entries/" ++ entryId
