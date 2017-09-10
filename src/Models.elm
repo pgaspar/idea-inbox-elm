@@ -28,4 +28,5 @@ type alias Entry =
 
 type Route
     = EntriesRoute
+    | EntryRoute EntryId
     | NotFoundRoute

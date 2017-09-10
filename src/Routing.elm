@@ -8,6 +8,7 @@ matchers : Parser (Route -> a) a
 matchers =
     oneOf
         [ map EntriesRoute top
+        , map EntryRoute (s "entries" </> string)
         , map EntriesRoute (s "entries")
         ]
 

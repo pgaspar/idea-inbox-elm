@@ -5,6 +5,7 @@ import Html exposing (Html, div, text)
 import Msgs exposing (Msg)
 import Models exposing (Model, EntryId)
 import Entries.List
+import Entries.Show
 import RemoteData
 
 
@@ -19,8 +20,38 @@ page model =
         Models.EntriesRoute ->
             Entries.List.view model.entries
 
+        Models.EntryRoute id ->
+            entryShowPage model id
+
         Models.NotFoundRoute ->
             notFoundView
+
+
+entryShowPage : Model -> EntryId -> Html Msg
+entryShowPage model entryId =
+    case model.entries of
+        RemoteData.NotAsked ->
+            text ""
+
+        RemoteData.Loading ->
+            text "Loading ..."
+
+        RemoteData.Success entries ->
+            let
+                maybeEntry =
+                    entries
+                        |> List.filter (\entry -> entry.id == entryId)
+                        |> List.head
+            in
+                case maybeEntry of
+                    Just entry ->
+                        Entries.Show.view entry
+
+                    Nothing ->
+                        notFoundView
+
+        RemoteData.Failure err ->
+            text (toString err)
 
 
 notFoundView : Html msg
