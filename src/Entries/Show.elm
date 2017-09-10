@@ -4,6 +4,7 @@ import Html exposing (..)
 import Html.Attributes exposing (class, value, href)
 import Msgs exposing (Msg)
 import Models exposing (Entry)
+import Routing exposing (entriesPath)
 
 
 view : Entry -> Html Msg
@@ -17,7 +18,7 @@ view model =
 nav : Entry -> Html Msg
 nav model =
     div [ class "clearfix mb2 white bg-black p1" ]
-        []
+        [ btnBackToList ]
 
 
 form : Entry -> Html Msg
@@ -52,3 +53,12 @@ btnVoteUp : Entry -> Html Msg
 btnVoteUp entry =
     a [ class "btn ml1 h1" ]
         [ text "▲" ]
+
+
+btnBackToList : Html Msg
+btnBackToList =
+    a
+        [ class "btn regular"
+        , href entriesPath
+        ]
+        [ text "« Back" ]
