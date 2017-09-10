@@ -18,7 +18,7 @@ view response =
 nav : Html Msg
 nav =
     div [ class "clearfix mb2 white bg-black" ]
-        [ div [ class "left p2" ] [ text "Ideas" ] ]
+        [ div [ class "left p2" ] [ text "How can we make tech more inclusive?" ] ]
 
 
 maybeList : WebData(List Entry) -> Html Msg
