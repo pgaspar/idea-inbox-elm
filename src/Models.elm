@@ -4,12 +4,16 @@ import RemoteData exposing (WebData)
 
 type alias Model =
     { entries : WebData(List Entry)
+    , route : Route
     }
 
-initialModel : Model
-initialModel =
+initialModel : Route -> Model
+initialModel route =
     { entries = RemoteData.Loading
+    , route = route
     }
+
+-- Entry Resource
 
 type alias EntryId =
     String
@@ -19,3 +23,9 @@ type alias Entry =
     , text : String
     , score : Int
     }
+
+-- Routes
+
+type Route
+    = EntriesRoute
+    | NotFoundRoute
